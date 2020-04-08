@@ -1,0 +1,114 @@
+{
+  "debug": "Debug",
+  "command": {
+    "dictionary": {
+      "description": "Modify dictionary.",
+      "usage": {
+        "create": "Creates new directory named `<name>`.",
+        "remove": "Removes a directory named `<name>`.",
+        "detail": "Show details of a directory named `<name>`."
+      },
+      "create_dictionary": {
+        "ok": "New dictionary *{}* had successfully created."
+      },
+      "cancel_create_dictionary": {
+        "ok": "Dictionary creation cancelled by user."
+      },
+      "remove_dictionary": {
+        "ok": "Dictionary *{}* had successfully removed."
+      },
+      "cancel_remove_dictionary": {
+        "ok": "Dictionary removal cancelled by user."
+      },
+      "operate": {
+        "name_unavailable": "Unavailable name! Check if:\n> 1. name is not entered.\n> 2. the name is not match to regex `^[A-Za-z \\d]{,50}$` (Dictionary name only can be made just within within 50 letters with English letters, decimals, and space)",
+        "create": {
+          "err": "Unavailable name! Check if:\n> 1. name is not entered.\n> 2. the name is not match to regex `^[A-Za-z \\d]{,50}$` (Dictionary name only can be made just within within 50 letters with English letters, decimals, and space)\n> 3. dictionary with that name already exists.",
+          "rp_message": "Are you sure you want to create a dictionary named *{}*?"
+        },
+        "remove": {
+          "err": "Error! Check if:\n> 1. name is not entered.\n> 2. the name is not match to regex `^[A-Za-z \\d]{,50}$` (Dictionary name only can be made just within within 50 letters with English letters, decimals, and space)\n> 3. dictionary with that name does not exist.",
+          "author_not_match": "Only author of dictionary and administrator can delete a dictionary.",
+          "rp_message": "Are you sure you want to remove dictionary *{}*?"
+        },
+        "detail": {
+          "err": "Error! Check if:\n> 1. name is not entered.\n> 2. the name is not match to regex `[A-Za-z \\d]{,50}` (Dictionary name only can be made just with English letters, decimals, and space)\n> 3. dictionary with that name does not exist.",
+          "details_of": "Details of *{}*",
+          "words": "Words",
+          "author": "Author",
+          "created_at": "Created At"
+        }
+      },
+      "operation_not_found": "Could not find an operation named _{}_ in this command."
+    },
+    "help": {
+      "description": "Read through list of available commands or see details on command.",
+      "usage": {
+        "passive": "Read through list of available commands.",
+        "command": "See details on `<command>`."
+      },
+      "operate": {
+        "label": {
+          "not_found": "Command with label *{}* not found.",
+          "details_on": "Details on `{}{}`"
+        },
+        "list": {
+          "here_is": "Here is list for available commands:"
+        }
+      }
+    },
+    "setting": {
+      "description": "Modification and Settings",
+      "usage": {
+        "language": "Sets language for you."
+      },
+      "operation": {
+        "set_language": "Set language to English. (English translation is not perfect)",
+        "language_unknown": "Cannot translate into that language."
+      }
+    },
+    "uptime": {
+      "description": "Shows uptime.",
+      "launch": "**Tobcidnock** {} launch. Uptime: **{}**"
+    },
+    "word": {
+      "description": "Manage words.",
+      "usage": {
+        "select": "Select dictionary to work about.",
+        "dictionary": "Show what dictionary user is currently selected.",
+        "define": "Define `<word>` to `<meaning>`. You can use spaces in `<word>` using with double quotation mark. (like `{}{} define 'Hello, world!' sentence hello-ing world`)",
+        "delete": "Delete `<word>`.",
+        "meaning": "Show meaning of `<word>`."
+      },
+      "delete_word_and_dump_and_send_message": {
+        "ok": "Deleted *{}*.",
+        "err": "Word *{}* not found."
+      },
+      "meaning": {
+        "word_in_language": "*{}* in *{}*",
+        "word_list": "Here is {} words containing *{}* in its word or meaning:",
+        "word_list_extra": "We have found {} more word(s).",
+        "not_found": "Word *{}* not found."
+      },
+      "dictionary_not_select": "You have not selected dictionary to work about. Please use `@@word dictionary <name>` to select your dictionary.",
+      "operate": {
+        "dictionary": {
+          "ok": "Dictionary *{}* successfully selected.",
+          "not_found": "Dictionary *{}* not found.",
+          "unavailable": "Received dictionary name is unavailable.",
+          "not_selected": "{} is not selecting any dictionaries.",
+          "selecting": "{} is currently selecting *{}*."
+        },
+        "define": {
+          "ok": "Defined meaning of **'{}'** to *\"{}\"*."
+        }
+      }
+    },
+    "contact": {
+      "description": "Contact to developer.",
+      "operate": {
+        "message": "We do our best to make user experience much better. Please send feedback or enhancement for this bot to contacts below!\n> **E-Mail** junhg0211@gmail.com\n> **Twitter**  @YtScratch\n> **GitHub**  https://github.com/junhg0211\n> **Discord**  스치#8861"
+      }
+    }
+  }
+}
