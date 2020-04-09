@@ -5,6 +5,7 @@ from discord import Client, Message, DMChannel, Reaction, User, TextChannel
 
 from feature.commands.Contact import Contact
 from feature.commands.Help import Help
+from feature.commands.Invite import Invite
 from feature.commands.Random import Random
 from feature.commands.Setting import Setting
 from feature.commands.Word import Word
@@ -53,6 +54,8 @@ class Tobcidnock(Client):
     async def on_ready(self):
         print(f'Logged on as {self.user}!')
 
+        self.log_channel = self.get_channel(LOG_CHANNEL)
+
         self.command_manager.add(Uptime(self))
         self.command_manager.add(Dictionary(self.request_pending_message_manager, self.word, self))
         self.command_manager.add(self.word)
@@ -60,6 +63,7 @@ class Tobcidnock(Client):
         self.command_manager.add(Setting(self))
         self.command_manager.add(Contact(self))
         self.command_manager.add(Random(self))
+        self.command_manager.add(Invite(self))
         if DEBUG:
             log = 'DEBUG is enabled. Only developers can use all of the features.'
             await self.log(log)
@@ -72,7 +76,6 @@ class Tobcidnock(Client):
         with open('./res/on.pickle', 'wb') as file:
             dump(self.on, file)
 
-        self.log_channel = self.get_channel(LOG_CHANNEL)
         await self.log_channel.send(f'<@&623041151993380874> {self.on}번째 작동 시작합니다. ({self.uptime})')
 
     async def on_message(self, message: Message):

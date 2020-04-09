@@ -121,6 +121,13 @@
           "invalid_number": "数字が正しくありません！１以上の整数が必要です。"
         }
       }
+    },
+    "invite": {
+      "description": "Tobcidnockを他のサーバーに招待します。",
+      "operate": {
+        "invite_link": "招待リンク",
+        "click_here": "[ここをクリック](https://discordapp.com/api/oauth2/authorize?client_id=697316460237946890&permissions=0&scope=bot)して他のサーバーへ招待ができます。"
+      }
     }
   }
 }

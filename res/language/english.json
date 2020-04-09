@@ -121,6 +121,13 @@
           "invalid_number": "Invalid number! Number of 1 or more is needed."
         }
       }
+    },
+    "invite": {
+      "description": "Invite Tobcidnock to another server.",
+      "operate": {
+        "invite_link": "Invite Link",
+        "click_here": "[Click here](https://discordapp.com/api/oauth2/authorize?client_id=697316460237946890&permissions=0&scope=bot) to invite Tobcidnock to another server!"
+      }
     }
   }
 }

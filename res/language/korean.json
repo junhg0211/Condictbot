@@ -121,6 +121,13 @@
           "invalid_number": "올바르지 않은 숫자입니다! 자연수가 필요합니다."
         }
       }
+    },
+    "invite": {
+      "description": "Tobcidnock을 다른 서버에 초대합니다.",
+      "operate": {
+        "invite_link": "초대 링크",
+        "click_here": "[이곳을 클릭](https://discordapp.com/api/oauth2/authorize?client_id=697316460237946890&permissions=0&scope=bot)하여 톱시드녹을 서버에 초대할 수 있습니다!"
+      }
     }
   }
 }
