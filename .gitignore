@@ -140,6 +140,5 @@ cython_debug/
 
 # Project Files
 res/dictionary/
-res/settings.pickle
 token.pickle
 .idea/workspace.xml
