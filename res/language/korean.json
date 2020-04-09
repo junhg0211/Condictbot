@@ -109,6 +109,18 @@
       "operate": {
         "message": "Tobcidnock은 사용자와 개발자가 함께하는 프로그램을 만들기 위해 노력합니다. 다음 연락처로 피드백, 개선할 점 등을 자유롭게 보내주시면 적극 수용하여 프로그램에 적용하도록 하겠습니다.\n> **이메일** junhg0211@gmail.com\n> **트위터**  @YtScratch\n> **GitHub**  https://github.com/junhg0211\n> **디스코드**  스치#8861"
       }
+    },
+    "random": {
+      "description": "랜덤한 것을 만들어냅니다.",
+      "usage": {
+        "number": "1부터 `<number>`까지의 숫자 중 하나를 랜덤하게 출력합니다.",
+        "word": "자음으로 `<consonants>`, 모음으로 `<vowels>`를 이용하여 `[syllable]`음절의 단어를 만듭니다. (`[syllable]`의 기본값은 2입니다.)"
+      },
+      "operate": {
+        "number": {
+          "invalid_number": "올바르지 않은 숫자입니다! 자연수가 필요합니다."
+        }
+      }
     }
   }
 }

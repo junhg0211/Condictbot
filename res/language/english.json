@@ -109,6 +109,18 @@
       "operate": {
         "message": "We do our best to make user experience much better. Please send feedback or enhancement for this bot to contacts below!\n> **E-Mail** junhg0211@gmail.com\n> **Twitter**  @YtScratch\n> **GitHub**  https://github.com/junhg0211\n> **Discord**  스치#8861"
       }
+    },
+    "random": {
+      "description": "Creates a random thing.",
+      "usage": {
+        "number": "Creates a random number between 1 to `<number>`.",
+        "word": "Creates a random word using `<consonants>` and `<vowels>` in `[syllable]` syllables. (Default `[syllable]` is 2.)"
+      },
+      "operate": {
+        "number": {
+          "invalid_number": "Invalid number! Number of 1 or more is needed."
+        }
+      }
     }
   }
 }

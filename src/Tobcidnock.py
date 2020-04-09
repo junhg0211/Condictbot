@@ -5,9 +5,10 @@ from discord import Client, Message, DMChannel, Reaction, User
 
 from feature.commands.Contact import Contact
 from feature.commands.Help import Help
+from feature.commands.Random import Random
 from feature.commands.Setting import Setting
 from feature.commands.Word import Word
-from util.constants import BOT_TOKEN, SEARCH_IDENTIFIER, COMMAND_IDENTIFIER
+from util.constants import BOT_TOKEN, SEARCH_IDENTIFIER, COMMAND_IDENTIFIER, DEBUG, DEVELOPER_USER_IDS
 from feature.commands.CommandManager import CommandManager
 from feature.commands.Debug import Debug
 from feature.commands.Dictionary import Dictionary
@@ -47,11 +48,15 @@ class Tobcidnock(Client):
 
         self.command_manager.add(Uptime(self))
         self.command_manager.add(Dictionary(self.request_pending_message_manager, self.word, self))
-        self.command_manager.add(Debug(self.request_pending_message_manager))
         self.command_manager.add(self.word)
         self.command_manager.add(Help(self.command_manager, self))
         self.command_manager.add(Setting(self))
         self.command_manager.add(Contact(self))
+        self.command_manager.add(Random(self))
+        if DEBUG:
+            print('DEBUG is enabled. Only developers can use all of the features.')
+
+            self.command_manager.add(Debug(self.request_pending_message_manager))
 
         with open('./res/on.pickle', 'rb') as file:
             self.on = load(file)
@@ -60,20 +65,21 @@ class Tobcidnock(Client):
             dump(self.on, file)
 
     async def on_message(self, message: Message):
-        await self.command_manager.operate(message)
+        if not DEBUG or (DEBUG and message.author.id in DEVELOPER_USER_IDS):
+            await self.command_manager.operate(message)
 
-        if message.content.startswith(COMMAND_IDENTIFIER) or message.content.startswith(SEARCH_IDENTIFIER) or \
-                message.author.id == self.user.id:
-            if isinstance(message.channel, DMChannel):
-                print(f'{message.created_at}\t{message.channel}\t{message.author}\t{str([message.content])[2:-2]}')
-            else:
-                print(f'{message.created_at}\t{message.guild}\t#{message.channel}\t{message.author}\t'
-                      f'{str([message.content])[2:-2]}')
+            if message.content.startswith(COMMAND_IDENTIFIER) or message.content.startswith(SEARCH_IDENTIFIER) or \
+                    message.author.id == self.user.id:
+                if isinstance(message.channel, DMChannel):
+                    print(f'{message.created_at}\t{message.channel}\t{message.author}\t{str([message.content])[2:-2]}')
+                else:
+                    print(f'{message.created_at}\t{message.guild}\t#{message.channel}\t{message.author}\t'
+                          f'{str([message.content])[2:-2]}')
 
-            if message.content.startswith(SEARCH_IDENTIFIER):
-                word = message.content[len(SEARCH_IDENTIFIER):]
-                if word:
-                    await self.word.meaning(word, message.author, message.channel)
+                if message.content.startswith(SEARCH_IDENTIFIER):
+                    word = message.content[len(SEARCH_IDENTIFIER):]
+                    if word:
+                        await self.word.meaning(word, message.author, message.channel)
 
     async def on_reaction_add(self, reaction: Reaction, user: User):
         self.request_pending_message_manager.on_reaction_add(reaction, user)

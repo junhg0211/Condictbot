@@ -109,6 +109,18 @@
       "operate": {
         "message": "Tobcidnock（トブシドナック）は使用者に最高の経験をくださるだめに努力します。次の連絡先にフィットバックやアイデアを共有してください。\n> **E-Mail** junhg0211@gmail.com\n> **Twitter**  @YtScratch\n> **GitHub**  https://github.com/junhg0211\n> **Discord**  스치#8861"
       }
+    },
+    "random": {
+      "description": "ランダムなことを出力します。",
+      "usage": {
+        "number": "１から`<number>`までの整数を一つ出力します。",
+        "word": "子音、`<consonants>`と母音、`<vowels>`を使って`[syllable]`音節のランダム単語を出力します。（`[syllable]`の基本は２です。）"
+      },
+      "operate": {
+        "number": {
+          "invalid_number": "数字が正しくありません！１以上の整数が必要です。"
+        }
+      }
     }
   }
 }

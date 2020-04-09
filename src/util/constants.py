@@ -4,6 +4,12 @@ import pickle
 with open('./token.pickle', 'rb') as file:
     BOT_TOKEN = pickle.load(file)
 
+DEBUG = False
+DEVELOPER_USER_IDS = (
+    697316460237946890,  # ITSELF
+    366565792910671873  # SCH
+)
+
 NAME = 'Tobcidnock'
 
 COMMAND_IDENTIFIER = '@@'
