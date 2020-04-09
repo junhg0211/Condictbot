@@ -73,6 +73,7 @@ class Tobcidnock(Client):
             dump(self.on, file)
 
         self.log_channel = self.get_channel(LOG_CHANNEL)
+        await self.log_channel.send(f'<@&623041151993380874> {self.on}번째 작동 시작합니다. ({self.uptime})')
 
     async def on_message(self, message: Message):
         if (not DEBUG or (DEBUG and message.author.id in DEVELOPER_USER_IDS)) and message.channel.id != LOG_CHANNEL:
@@ -81,11 +82,11 @@ class Tobcidnock(Client):
             if message.content.startswith(COMMAND_IDENTIFIER) or message.content.startswith(SEARCH_IDENTIFIER) or \
                     message.author.id == self.user.id:
                 if isinstance(message.channel, DMChannel):
-                    log = f'T{message.created_at}\tC{message.channel}\tU{message.author}\t' \
-                          f'M{str([message.content])[2:-2]}'
+                    log = f'T{message.created_at}\tC{message.channel}\tU{message.author}' \
+                          f'\n> {str([message.content])[2:-2]}'
                 else:
-                    log = f'T{message.created_at}\tG{message.guild}\t#{message.channel}\tU{message.author}\t' \
-                          f'M{str([message.content])[2:-2]}'
+                    log = f'T{message.created_at}\tG{message.guild}\t#{message.channel}\tU{message.author}' \
+                          f'> {str([message.content])[2:-2]}'
                 await self.log(log)
 
                 if message.content.startswith(SEARCH_IDENTIFIER):
