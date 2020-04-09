@@ -46,6 +46,10 @@ class Tobcidnock(Client):
         with open('./res/settings.pickle', 'wb') as file:
             dump(self.settings, file)
 
+    async def log(self, log: str):
+        print(log)
+        await self.log_channel.send(log)
+
     async def on_ready(self):
         print(f'Logged on as {self.user}!')
 
@@ -57,7 +61,8 @@ class Tobcidnock(Client):
         self.command_manager.add(Contact(self))
         self.command_manager.add(Random(self))
         if DEBUG:
-            print('DEBUG is enabled. Only developers can use all of the features.')
+            log = 'DEBUG is enabled. Only developers can use all of the features.'
+            await self.log(log)
 
             self.command_manager.add(Debug(self.request_pending_message_manager))
 
@@ -70,7 +75,7 @@ class Tobcidnock(Client):
         self.log_channel = self.get_channel(LOG_CHANNEL)
 
     async def on_message(self, message: Message):
-        if not DEBUG or (DEBUG and message.author.id in DEVELOPER_USER_IDS):
+        if (not DEBUG or (DEBUG and message.author.id in DEVELOPER_USER_IDS)) and message.channel.id != LOG_CHANNEL:
             await self.command_manager.operate(message)
 
             if message.content.startswith(COMMAND_IDENTIFIER) or message.content.startswith(SEARCH_IDENTIFIER) or \
@@ -81,8 +86,7 @@ class Tobcidnock(Client):
                 else:
                     log = f'T{message.created_at}\tG{message.guild}\t#{message.channel}\tU{message.author}\t' \
                           f'M{str([message.content])[2:-2]}'
-                print(log)
-                await self.log_channel.send(log)
+                await self.log(log)
 
                 if message.content.startswith(SEARCH_IDENTIFIER):
                     word = message.content[len(SEARCH_IDENTIFIER):]
