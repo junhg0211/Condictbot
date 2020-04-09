@@ -1,14 +1,14 @@
 from datetime import datetime
 from pickle import load, dump
 
-from discord import Client, Message, DMChannel, Reaction, User
+from discord import Client, Message, DMChannel, Reaction, User, TextChannel
 
 from feature.commands.Contact import Contact
 from feature.commands.Help import Help
 from feature.commands.Random import Random
 from feature.commands.Setting import Setting
 from feature.commands.Word import Word
-from util.constants import BOT_TOKEN, SEARCH_IDENTIFIER, COMMAND_IDENTIFIER, DEBUG, DEVELOPER_USER_IDS
+from util.constants import BOT_TOKEN, SEARCH_IDENTIFIER, COMMAND_IDENTIFIER, DEBUG, DEVELOPER_USER_IDS, LOG_CHANNEL
 from feature.commands.CommandManager import CommandManager
 from feature.commands.Debug import Debug
 from feature.commands.Dictionary import Dictionary
@@ -39,6 +39,9 @@ class Tobcidnock(Client):
 
         self.on = 0
 
+        # noinspection PyTypeChecker
+        self.log_channel: TextChannel = None
+
     def dump_settings(self):
         with open('./res/settings.pickle', 'wb') as file:
             dump(self.settings, file)
@@ -64,6 +67,8 @@ class Tobcidnock(Client):
         with open('./res/on.pickle', 'wb') as file:
             dump(self.on, file)
 
+        self.log_channel = self.get_channel(LOG_CHANNEL)
+
     async def on_message(self, message: Message):
         if not DEBUG or (DEBUG and message.author.id in DEVELOPER_USER_IDS):
             await self.command_manager.operate(message)
@@ -71,10 +76,13 @@ class Tobcidnock(Client):
             if message.content.startswith(COMMAND_IDENTIFIER) or message.content.startswith(SEARCH_IDENTIFIER) or \
                     message.author.id == self.user.id:
                 if isinstance(message.channel, DMChannel):
-                    print(f'{message.created_at}\t{message.channel}\t{message.author}\t{str([message.content])[2:-2]}')
+                    log = f'T{message.created_at}\tC{message.channel}\tU{message.author}\t' \
+                          f'M{str([message.content])[2:-2]}'
                 else:
-                    print(f'{message.created_at}\t{message.guild}\t#{message.channel}\t{message.author}\t'
-                          f'{str([message.content])[2:-2]}')
+                    log = f'T{message.created_at}\tG{message.guild}\t#{message.channel}\tU{message.author}\t' \
+                          f'M{str([message.content])[2:-2]}'
+                print(log)
+                await self.log_channel.send(log)
 
                 if message.content.startswith(SEARCH_IDENTIFIER):
                     word = message.content[len(SEARCH_IDENTIFIER):]

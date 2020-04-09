@@ -27,3 +27,5 @@ with open('./res/language/korean.json', 'r') as file:
     KOREAN_LAN = json.load(file)
 with open('./res/language/japanese.json', 'r') as file:
     JAPANESE_LAN = json.load(file)
+
+LOG_CHANNEL = 697706935826251827
