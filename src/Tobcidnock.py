@@ -82,8 +82,6 @@ class Tobcidnock(Client):
 
     async def on_message(self, message: Message):
         if (not DEBUG or (DEBUG and message.author.id in DEVELOPER_USER_IDS)) and message.channel.id != LOG_CHANNEL:
-            await self.command_manager.operate(message)
-
             if message.content.startswith(COMMAND_IDENTIFIER) or message.content.startswith(SEARCH_IDENTIFIER) or \
                     message.author.id == self.user.id:
                 if isinstance(message.channel, DMChannel):
@@ -98,6 +96,8 @@ class Tobcidnock(Client):
                     word = message.content[len(SEARCH_IDENTIFIER):]
                     if word:
                         await self.word.meaning(word, message.author, message.channel)
+
+            await self.command_manager.operate(message)
 
     async def on_reaction_add(self, reaction: Reaction, user: User):
         self.request_pending_message_manager.on_reaction_add(reaction, user)
