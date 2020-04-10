@@ -128,6 +128,18 @@
         "invite_link": "초대 링크",
         "click_here": "[이곳을 클릭](https://discordapp.com/api/oauth2/authorize?client_id=697316460237946890&permissions=0&scope=bot)하여 톱시드녹을 서버에 초대할 수 있습니다!"
       }
+    },
+    "chat": {
+      "description": "채팅을 보냅니다.",
+      "usage": {
+        "channel": "ID가 `<#ID>`인 채널에 채팅을 보냅니다.",
+        "user": "ID가 `<@ID>`인 유저에게 채팅을 보냅니다."
+      },
+      "operate": {
+        "message_from_dev": "개발자로부터의 메시지입니다.",
+        "no_channel": "채널을 찾을 수 없습니다.",
+        "no_user": "유저를 찾을 수 없습니다."
+      }
     }
   }
 }

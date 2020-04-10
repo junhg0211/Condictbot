@@ -3,6 +3,7 @@ from pickle import load, dump
 
 from discord import Client, Message, DMChannel, Reaction, User, TextChannel
 
+from feature.commands.Chat import Chat
 from feature.commands.Contact import Contact
 from feature.commands.Help import Help
 from feature.commands.Invite import Invite
@@ -64,6 +65,7 @@ class Tobcidnock(Client):
         self.command_manager.add(Contact(self))
         self.command_manager.add(Random(self))
         self.command_manager.add(Invite(self))
+        self.command_manager.add(Chat(self))
         if DEBUG:
             log = 'DEBUG is enabled. Only developers can use all of the features.'
             await self.log(log)
@@ -85,11 +87,11 @@ class Tobcidnock(Client):
             if message.content.startswith(COMMAND_IDENTIFIER) or message.content.startswith(SEARCH_IDENTIFIER) or \
                     message.author.id == self.user.id:
                 if isinstance(message.channel, DMChannel):
-                    log = f'T{message.created_at}\tC{message.channel}\tU{message.author}' \
-                          f'\n> {str([message.content])[2:-2]}'
-                else:
-                    log = f'T{message.created_at}\tG{message.guild}\t#{message.channel}\tU{message.author}' \
+                    log = f'T{message.created_at}, #{message.channel}, U{message.author}({message.author.id})\n' \
                           f'> {str([message.content])[2:-2]}'
+                else:
+                    log = f'T{message.created_at}, G{message.guild}, #{message.channel}({message.channel.id}), ' \
+                          f'U{message.author}\n> {str([message.content])[2:-2]}'
                 await self.log(log)
 
                 if message.content.startswith(SEARCH_IDENTIFIER):
