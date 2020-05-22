@@ -78,7 +78,7 @@ class Tobcidnock(Client):
         with open('./res/on.pickle', 'wb') as file:
             dump(self.on, file)
 
-        await self.log_channel.send(f'<@&623041151993380874> {self.on}번째 작동 시작합니다. ({self.uptime})')
+        await self.log_channel.send(f'{self.on}번째 작동 시작합니다. ({self.uptime})')
 
     async def on_message(self, message: Message):
         if (not DEBUG or (DEBUG and message.author.id in DEVELOPER_USER_IDS)) and message.channel.id != LOG_CHANNEL:
