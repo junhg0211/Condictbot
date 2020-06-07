@@ -211,7 +211,7 @@ class Dictionary(Command):
                 list_message = get_language(self.tobcidnock, message.author)['command']['dictionary']['operate'][
                     'list']['server']
 
-            files = [f for f in listdir(base_directory) if isfile(join(base_directory, f))]
+            files = [f.split('.')[0] for f in listdir(base_directory) if isfile(join(base_directory, f))]
 
             if files:
                 files = '`' + ('`, `'.join(files)) + '`'
