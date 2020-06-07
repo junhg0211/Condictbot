@@ -1,7 +1,7 @@
 from asyncio import create_task
 from datetime import datetime
 from os import mkdir, remove, listdir
-from os.path import exists, isfile, join
+from os.path import exists, isfile, join, isdir
 from pickle import dump, load
 from re import findall
 
@@ -210,6 +210,11 @@ class Dictionary(Command):
                 base_directory = f'./res/dictionary/{message.guild.id}'
                 list_message = get_language(self.tobcidnock, message.author)['command']['dictionary']['operate'][
                     'list']['server']
+
+            if isdir(base_directory):
+                await message.channel.send('{} {} {}'.format(self.emoji, get_language(self.tobcidnock, message.author)[
+                    'command']['dictionary']['operate']['list']['not_exist'], WORK_END_EMOJI))
+                return
 
             files = [f.split('.')[0] for f in listdir(base_directory) if isfile(join(base_directory, f))]
 
