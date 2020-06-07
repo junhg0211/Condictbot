@@ -6,7 +6,8 @@
       "usage": {
         "create": "Creates new directory named `<name>`.",
         "remove": "Removes a directory named `<name>`.",
-        "detail": "Show details of a directory named `<name>`."
+        "detail": "Shows details of a directory named `<name>`.",
+        "list": "Shows list of all dictionaries available on this server/DM channel."
       },
       "create_dictionary": {
         "ok": "New dictionary *{}* had successfully created."
@@ -37,6 +38,11 @@
           "words": "Words",
           "author": "Author",
           "created_at": "Created At"
+        },
+        "list": {
+          "dm": "You can use these dictionaries:",
+          "server": "There are these dictionaries on this server:",
+          "not_exist": "There is no any available dictionary."
         }
       },
       "operation_not_found": "Could not find an operation named _{}_ in this command."

@@ -1,7 +1,7 @@
 from asyncio import create_task
 from datetime import datetime
-from os import mkdir, remove
-from os.path import exists
+from os import mkdir, remove, listdir
+from os.path import exists, isfile, join
 from pickle import dump, load
 from re import findall
 
@@ -22,7 +22,8 @@ class Dictionary(Command):
     usage_paths: tuple = (
         (f'{COMMAND_IDENTIFIER}{head} create `<name>`', 'command.dictionary.usage.create'),
         (f'{COMMAND_IDENTIFIER}{head} remove `<name>`', 'command.dictionary.usage.remove'),
-        (f'{COMMAND_IDENTIFIER}{head} detail `<name>`', 'command.dictionary.usage.detail')
+        (f'{COMMAND_IDENTIFIER}{head} detail `<name>`', 'command.dictionary.usage.detail'),
+        (f'{COMMAND_IDENTIFIER}{head} list', 'command.dictionary.usage.list')
     )
     admin_only: bool = False
 
@@ -159,7 +160,12 @@ class Dictionary(Command):
                                            self.cancel_remove_directory(message.channel, message.author))}))
 
         elif operation == 'detail':
-            if not (name and exists(f'./res/dictionary/{message.guild.id}/{name}.pickle')):
+            if is_dm_channel(message.channel):
+                base_directory = f'./res/dictionary/dm/{message.author.id}'
+            else:
+                base_directory = f'./res/dictionary/{message.guild.id}'
+
+            if not (name and exists(f'{base_directory}/{name}.pickle')):
                 await message.channel.send('{} {} {}'.format(
                     self.emoji,
                     get_language(self.tobcidnock, message.author)['command']['dictionary']['operate']['detail']['err'],
@@ -167,7 +173,7 @@ class Dictionary(Command):
                 ))
                 return
 
-            with open(f'./res/dictionary/{message.guild.id}/{name}.pickle', 'rb') as file:
+            with open(f'{base_directory}/{name}.pickle', 'rb') as file:
                 dictionary = load(file)
             embed: Embed = Embed(
                 title=get_language(self.tobcidnock, message.author)['command']['dictionary']['operate']['detail'][
@@ -177,6 +183,7 @@ class Dictionary(Command):
                 name=get_language(self.tobcidnock, message.author)['command']['dictionary']['operate']['detail'][
                     'words'],
                 value=str(len(dictionary)))
+
             if is_dm_channel(message.channel):
                 embed.add_field(
                     name=get_language(self.tobcidnock, message.author)['command']['dictionary']['operate']['detail'][
@@ -193,6 +200,25 @@ class Dictionary(Command):
                 value=str(datetime(*dictionary['CREATED'])))
 
             await message.channel.send(self.emoji, embed=embed)
+
+        elif operation == 'list':
+            if is_dm_channel(message.channel):
+                base_directory = f'./res/dictionary/dm/{message.author.id}'
+                list_message = get_language(self.tobcidnock, message.author)['command']['dictionary']['operate'][
+                    'list']['dm']
+            else:
+                base_directory = f'./res/dictionary/{message.guild.id}'
+                list_message = get_language(self.tobcidnock, message.author)['command']['dictionary']['operate'][
+                    'list']['server']
+
+            files = [f for f in listdir(base_directory) if isfile(join(base_directory, f))]
+
+            if files:
+                files = '`' + ('`, `'.join(files)) + '`'
+                await message.channel.send('{} {}\n> {} {}'.format(self.emoji, list_message, files, WORK_END_EMOJI))
+            else:
+                await message.channel.send('{} {} {}'.format(self.emoji, get_language(self.tobcidnock, message.author)[
+                    'command']['dictionary']['operate']['list']['not_exist'], WORK_END_EMOJI))
 
         else:
             if operation:
