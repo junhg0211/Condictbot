@@ -211,7 +211,7 @@ class Dictionary(Command):
                 list_message = get_language(self.tobcidnock, message.author)['command']['dictionary']['operate'][
                     'list']['server']
 
-            if isdir(base_directory):
+            if not isdir(base_directory):
                 await message.channel.send('{} {} {}'.format(self.emoji, get_language(self.tobcidnock, message.author)[
                     'command']['dictionary']['operate']['list']['not_exist'], WORK_END_EMOJI))
                 return
