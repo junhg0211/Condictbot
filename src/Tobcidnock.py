@@ -56,6 +56,14 @@ class Tobcidnock(Client):
     async def on_ready(self):
         print(f'Logged on as {self.user}!')
 
+        with open('./res/on.pickle', 'rb') as file:
+            self.on = load(file)
+        self.on += 1
+        with open('./res/on.pickle', 'wb') as file:
+            dump(self.on, file)
+
+        await self.log_channel.send(f'{self.on}번째 작동 준비중입니다. ({self.uptime})')
+
         self.log_channel = self.get_channel(LOG_CHANNEL)
 
         self.command_manager.initialize()
@@ -74,12 +82,6 @@ class Tobcidnock(Client):
             await self.log(log)
 
             self.command_manager.add(Debug(self.request_pending_message_manager))
-
-        with open('./res/on.pickle', 'rb') as file:
-            self.on = load(file)
-        self.on += 1
-        with open('./res/on.pickle', 'wb') as file:
-            dump(self.on, file)
 
         await self.log_channel.send(f'{self.on}번째 작동 시작합니다. ({self.uptime})')
 
