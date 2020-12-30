@@ -73,6 +73,12 @@ you can remove a dictionary.
 * You can remove a dictionary with `@@dict remove <name>`.
 * After a confirmation, the dictionary will be removed.
 
+### Export a Dictionary
+
+* If you want to filize your dictionary and manifacture to your custom library,
+you can export your dictionary.
+* You can export your dictionary with `@@export <dictionary_name>`.
+
 ### Contact
 
 * If there is an error in transition or its feature,
