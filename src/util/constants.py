@@ -21,11 +21,11 @@ WORK_END_EMOJI = '☑️'
 
 COLOR = 0x7255D1
 
-with open('./res/language/english.json', 'r') as file:
+with open('./res/language/english.json', 'r', encoding='utf-8') as file:
     ENGLISH_LAN = json.load(file)
-with open('./res/language/korean.json', 'r') as file:
+with open('./res/language/korean.json', 'r', encoding='utf-8') as file:
     KOREAN_LAN = json.load(file)
-with open('./res/language/japanese.json', 'r') as file:
+with open('./res/language/japanese.json', 'r', encoding='utf-8') as file:
     JAPANESE_LAN = json.load(file)
 
 LOG_CHANNEL = 697706935826251827

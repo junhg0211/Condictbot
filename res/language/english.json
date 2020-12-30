@@ -136,7 +136,7 @@
       }
     },
     "chat": {
-      "description": "Sends a message",
+      "description": "Sends a message.",
       "usage": {
         "channel": "Send a message to channel ID `<ID>`",
         "user": "Send a message to user ID `<ID>`"
@@ -145,6 +145,15 @@
         "message_from_dev": "Message from a developer.",
         "no_channel": "Cannot find channel.",
         "no_user": "Cannot find user."
+      }
+    },
+    "export": {
+      "description": "Exports your language into a file.",
+      "usage": {
+        "dictionary_name": "Export and send you the dictionary as a file."
+      },
+      "operate": {
+        "no_dictionary": "Dictionary *{}* not found."
       }
     }
   }

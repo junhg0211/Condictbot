@@ -15,6 +15,9 @@ class CommandManager:
     def add(self, command: Command):
         self.commands.append(command)
 
+    def initialize(self):
+        self.commands.clear()
+
     async def operate(self, message: Message):
         for command in self.commands:
             await sleep(0)

@@ -1,3 +1,5 @@
+import json
+import pickle
 from re import findall
 
 from discord import DMChannel, User
@@ -51,6 +53,15 @@ def get_language(tobcidnock, user: User) -> dict:
         return KOREAN_LAN
     elif tobcidnock.settings['USER'][user.id]['LANGUAGE'] == 'JAPANESE':
         return JAPANESE_LAN
+
+
+def pickle_to_json(path):
+    with open(path, 'rb') as pickle_file:
+        data = pickle.load(pickle_file)
+    json_path = path[::-1].split('.', 1)[1][::-1] + '.json'
+    with open(json_path, 'w') as json_file:
+        json.dump(data, json_file)
+    return json_path
 
 
 if __name__ == '__main__':

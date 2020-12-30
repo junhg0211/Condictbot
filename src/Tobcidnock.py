@@ -5,6 +5,7 @@ from discord import Client, Message, DMChannel, Reaction, User, TextChannel
 
 from feature.commands.Chat import Chat
 from feature.commands.Contact import Contact
+from feature.commands.Export import Export
 from feature.commands.Help import Help
 from feature.commands.Invite import Invite
 from feature.commands.Random import Random
@@ -57,6 +58,7 @@ class Tobcidnock(Client):
 
         self.log_channel = self.get_channel(LOG_CHANNEL)
 
+        self.command_manager.initialize()
         self.command_manager.add(Uptime(self))
         self.command_manager.add(Dictionary(self.request_pending_message_manager, self.word, self))
         self.command_manager.add(self.word)
@@ -66,6 +68,7 @@ class Tobcidnock(Client):
         self.command_manager.add(Random(self))
         self.command_manager.add(Invite(self))
         self.command_manager.add(Chat(self))
+        self.command_manager.add(Export(self))
         if DEBUG:
             log = 'DEBUG is enabled. Only developers can use all of the features.'
             await self.log(log)
@@ -104,5 +107,6 @@ class Tobcidnock(Client):
 
 
 def main():
+    print('Client booting...')
     client = Tobcidnock()
     client.run(BOT_TOKEN)

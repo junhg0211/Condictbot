@@ -146,6 +146,15 @@
         "no_channel": "채널을 찾을 수 없습니다.",
         "no_user": "유저를 찾을 수 없습니다."
       }
+    },
+    "export": {
+      "description": "사전을 파일로 출력합니다.",
+      "usage": {
+        "dictionary_name": "사전을 파일로 출력합니다."
+      },
+      "operate": {
+        "no_dictionary": "*{}* 사전을 찾을 수 없습니다."
+      }
     }
   }
 }
